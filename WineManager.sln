@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineManager.EntityModels.Sq
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.EntityModels.Sqlite", "WineManager.EntityModels.Sqlite", "{37D5F40A-FC65-4CBD-9628-A4922BF87598}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.DataContext.Sqlite", "WineManager.DataContext.Sqlite", "{69F2A5C9-94F1-4C1D-A9CA-98E867715224}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.DataContext", "WineManager.DataContext", "{69F2A5C9-94F1-4C1D-A9CA-98E867715224}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineManager.DataContext.Sqlite", "WineManager.DataContext.Sqlite\WineManager.DataContext.Sqlite.csproj", "{D26E0175-BFC2-4DF0-9F28-8619BB15C709}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.UnitTests", "WineManager.UnitTests", "{BBB42CE6-1D3F-4816-94C0-3CD5F114ED30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineManager.UnitTests", "WineManager.UnitTests\WineManager.UnitTests.csproj", "{297A5FED-0712-4FA6-A069-D1829CA96C86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{D26E0175-BFC2-4DF0-9F28-8619BB15C709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D26E0175-BFC2-4DF0-9F28-8619BB15C709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D26E0175-BFC2-4DF0-9F28-8619BB15C709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{297A5FED-0712-4FA6-A069-D1829CA96C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297A5FED-0712-4FA6-A069-D1829CA96C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297A5FED-0712-4FA6-A069-D1829CA96C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297A5FED-0712-4FA6-A069-D1829CA96C86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C6C84EDB-81BB-4016-8368-8CD50CE9BE21} = {37D5F40A-FC65-4CBD-9628-A4922BF87598}
 		{D26E0175-BFC2-4DF0-9F28-8619BB15C709} = {69F2A5C9-94F1-4C1D-A9CA-98E867715224}
+		{297A5FED-0712-4FA6-A069-D1829CA96C86} = {BBB42CE6-1D3F-4816-94C0-3CD5F114ED30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EDA686D-7280-4EA3-BED9-08D2F7E16F27}
