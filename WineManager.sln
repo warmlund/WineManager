@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineManager.EntityModels.Sq
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.EntityModels.Sqlite", "WineManager.EntityModels.Sqlite", "{37D5F40A-FC65-4CBD-9628-A4922BF87598}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.DataContext.Sqlite", "WineManager.DataContext.Sqlite", "{69F2A5C9-94F1-4C1D-A9CA-98E867715224}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.DataContext", "WineManager.DataContext", "{69F2A5C9-94F1-4C1D-A9CA-98E867715224}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineManager.DataContext.Sqlite", "WineManager.DataContext.Sqlite\WineManager.DataContext.Sqlite.csproj", "{D26E0175-BFC2-4DF0-9F28-8619BB15C709}"
 EndProject
