@@ -13,12 +13,18 @@ public partial class Producer
     [Column("producerId")]
     public int ProducerId { get; set; }
 
+    [Required]
+    [StringLength(50)]
     [Column("producerName")]
     public string ProducerName { get; set; } = null!;
 
+    [Required]
+    [StringLength(50)]
     [Column("country")]
     public string Country { get; set; } = null!;
 
+    [Required]
+    [StringLength(50)]
     [Column("region")]
     public string Region { get; set; } = null!;
 
