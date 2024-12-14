@@ -3,90 +3,114 @@
 @model WineManager.Web.Pages.ProducersModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div class="row gy-2">
-    <h2>Producers</h2>
+<div class="mx-auto p-1 py-3">
+    <!-- Added container for better structure -->
+    <!-- Header Section -->
+    <div class="grid gap-0 row-gap-3">
+        <!-- Spacing between elements -->
+        <div class="p-2 g-col-6">
+            <a class="btn btn-light" href="index">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                </svg>
+                Back
+            </a>
+        </div>
+        <div class="p-2 g-col-6">
+            <h2>Producers</h2>
+        </div>
+    </div>
+
+    <!-- Delete Selected Form -->
+    <div class="grid gap-0 row-gap-3">
     <form method="POST" asp-page-handler="DeleteSelected">
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-primary" id="removeButton" disabled>
-            Remove Selected Producer(s)
-        </button>
-    </div>
+            <div class="p-2 g-col-6">
+            <button type="submit" class="btn btn-primary" id="removeButton" disabled>
+                Remove Selected Producer(s)
+            </button>
+            </div>
 
-    <div class="row gy-2">
-    <table class="table">
-        <thead class="thead-inverse">
-            <tr>
-                <th>
-                    <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)" />
-                </th>
-                <th>Name</th>
-                <th>Region</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Producers!!=null)
-            {
-                @foreach(Producer producer in Model.Producers)
-                {
+        <!-- Producers Table -->
+        <div class="table-responsive mb-4">
+            <!-- Added responsive table with spacing -->
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <td>
-                            <input type="checkbox" name="selectedProducers" value="@producer.ProducerId" />
-                        </td>
-                        <td>@producer.ProducerName</td>
-                        <td>@producer.Region</td>
-                        <td>@producer.Country</td>
+                        <th>
+                            <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)" />
+                        </th>
+                        <th>Name</th>
+                        <th>Region</th>
+                        <th>Country</th>
                     </tr>
-                }
-            }
-         </tbody>
-    </table>
-    </div>
+                </thead>
+                <tbody>
+                    @if (Model.Producers != null)
+                    {
+                        @foreach (Producer producer in Model.Producers)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="selectedProducers" value="@producer.ProducerId" />
+                                </td>
+                                <td>@producer.ProducerName</td>
+                                <td>@producer.Region</td>
+                                <td>@producer.Country</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </form>
+    </div>
 
-    <h4>Add Producer</h4>
+    <!-- Add Producer Form -->
+    <h4 class="mb-4">Add Producer</h4>
     <form method="POST" id="producerForm" class="was-validated">
-        <div class="col-md-6 mb-4">
-            <label for="validationName" class="form-label">Name</label>
-            <input asp-for="Producer.ProducerName" 
-            placeholder="Name" 
-            class="form-control" 
-            id="validationName" 
-            required
-            maxlength="50"
-            oninput="validateForm()">
-            <div class="invalid-feedback" style="display: @(string.IsNullOrEmpty(Model.ErrorMessage) ? "none" : "block")">
-                @Model.ErrorMessage
+        <div class="row gy-3">
+            <div class="col-md-6">
+                <label for="validationName" class="form-label">Name</label>
+                <input asp-for="Producer.ProducerName"
+                       placeholder="Name"
+                       class="form-control"
+                       id="validationName"
+                       required
+                       maxlength="50"
+                       oninput="validateForm()">
+                <div class="invalid-feedback" style="display: @(string.IsNullOrEmpty(Model.ErrorMessage) ? "none" : "block")">
+                    @Model.ErrorMessage
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="validationRegion" class="form-label">Region</label>
+                <input asp-for="Producer.Region"
+                       placeholder="Region"
+                       class="form-control"
+                       id="validationRegion"
+                       required
+                       maxlength="50"
+                       oninput="validateForm()">
+            </div>
+            <div class="col-md-6">
+                <label for="validationCountry" class="form-label">Country</label>
+                <input asp-for="Producer.Country"
+                       placeholder="Country"
+                       class="form-control is-valid"
+                       id="validationCountry"
+                       required
+                       maxlength="50"
+                       oninput="validateForm()">
             </div>
         </div>
-        <div class="col-md-6 mb-4">
-            <label for="validationRegion" class="form-label">Region</label>
-            <input asp-for="Producer.Region" 
-            placeholder="Region" 
-            class="form-control"
-            id="validationRegion" 
-            required
-            maxlength="50"
-            oninput="validateForm()">
-        </div>
-        <div class="col-md-6 mb-4">
-            <label for="validationCountry" class="form-label">Country</label>
-            <input asp-for="Producer.Country"
-            placeholder="Country"
-            class="form-control is-valid"
-            id="validationCountry"
-            required 
-            maxlength="50"
-            oninput="validateForm()">
-        </div>
-        <div class="col-md-12">
-        <button class="btn btn-primary" type="submit" id="submitButton" disabled>Add</button>
+        <div class="col-md-12 mt-3">
+            <button class="btn btn-primary" type="submit" id="submitButton" disabled>Add</button>
         </div>
     </form>
 </div>
 
 <script>
-    // JavaScript to handle "Select All" functionality
+    // JavaScript for toggling checkboxes
     function toggleAllCheckboxes(selectAllCheckbox) {
         const checkboxes = document.querySelectorAll('input[name="selectedProducers"]');
         checkboxes.forEach(checkbox => {
@@ -96,35 +120,12 @@
 </script>
 
 <script>
+    // JavaScript to validate the form
     function validateForm() {
         const name = document.getElementById("validationName");
         const region = document.getElementById("validationRegion");
         const country = document.getElementById("validationCountry");
         const submitButton = document.getElementById("submitButton");
 
-        // Check if region and country inputs are valid
-        if (name.checkValidity() && region.checkValidity() && country.checkValidity()) {
-            submitButton.disabled = false; // Enable button
-        } else {
-            submitButton.disabled = true; // Disable button
-        }
-    }
-</script>
-
-<script>
-    function toggleRemoveButton() {
-        const checkboxes = document.querySelectorAll('input[name="selectedProducers"]:checked');
-        const removeButton = document.getElementById("removeButton");
-
-        // Enable the button if at least one checkbox is checked
-        removeButton.disabled = checkboxes.length === 0;
-    }
-
-    // Attach the function to checkbox changes
-    document.querySelectorAll('input[name="selectedProducers"]').forEach(checkbox => {
-        checkbox.addEventListener("change", toggleRemoveButton);
-    });
-
-    // Optional: Attach to "Select All" checkbox
-    document.getElementById("selectAll").addEventListener("change", toggleRemoveButton);
+        if (name.checkValidity()
 </script>
