@@ -5,13 +5,13 @@
 
     public void OnGet()
     {
-        ViewBag.Title = "Wine Manager";
+        ViewData["Title"] = "Wine Manager";
         DayName = DateTime.Now.ToString("dddd");
     }
 }
 
  <div class="jumbotron">
-     <h1 class="display-3">Welcome to @ViewBag.Title</h1>
+     <h1 class="display-3">Welcome to @ViewData["Title"]</h1>
      <p class="lead">It's @DayName A wine management system</p>
      <hr />
      <p>

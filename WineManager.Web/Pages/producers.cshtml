@@ -1,0 +1,29 @@
+﻿@page
+@using WineManager.EntityModels
+@model WineManager.Web.Pages.ProducersModel
+
+<div class="row">
+    <h1 class="display-2">Producers</h1>
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Name</th>
+                <th>Region</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Producers is not null)
+            {
+                @foreach(Producer producer in Model.Producers)
+                {
+                    <tr>
+                        <td>@producer.ProducerName</td>
+                        <td>@producer.Region</td>
+                        <td>@producer.Country</td>
+                    </tr>
+                }
+            }
+         </tbody>
+    </table>
+</div>

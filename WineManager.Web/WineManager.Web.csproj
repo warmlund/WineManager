@@ -6,12 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Using Include="System.Console" Static="true" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WineManager.DataContext.Sqlite\WineManager.DataContext.Sqlite.csproj" />
+  </ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages - Copy\" />
+		<Using Include="System.Console" Static="true" />
 	</ItemGroup>
 	
 </Project>
