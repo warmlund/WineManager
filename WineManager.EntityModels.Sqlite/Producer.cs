@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace WineManager.EntityModels;
@@ -29,5 +30,6 @@ public partial class Producer
     public string Region { get; set; } = null!;
 
     [InverseProperty("Producer")]
+    [XmlIgnore]
     public virtual ICollection<Wine> Wines { get; set; } = new List<Wine>();
 }
