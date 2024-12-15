@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\pagescripts.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WineManager.DataContext.Sqlite\WineManager.DataContext.Sqlite.csproj" />
   </ItemGroup>
 

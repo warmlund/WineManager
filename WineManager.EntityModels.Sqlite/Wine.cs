@@ -21,7 +21,6 @@ public partial class Wine
 
     [Required]
     [Range(187, 1500)]
-    [DefaultValue(750)]
     [Column("bottleSize")]
     public int BottleSize { get; set; }
 
