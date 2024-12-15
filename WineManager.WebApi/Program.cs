@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc.Formatters;
-using WineManager.DataContext.Sqlite;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.HttpLogging;
 using WineManager.WebApi.Repositories;
+using WineManager.DataContext.Sqlite;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,12 +33,17 @@ builder.Services.AddControllers(options =>
     .AddXmlDataContractSerializerFormatters()
     .AddXmlSerializerFormatters();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
 builder.Services.AddScoped<IWineRepository, WineRepository>();
 builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
+builder.Services.AddHttpLogging(options =>
+{
+    options.LoggingFields = HttpLoggingFields.All;
+    options.RequestBodyLogLimit = 4096;
+    options.ResponseBodyLogLimit = 4096;
+});
 
 var app = builder.Build();
 
@@ -44,10 +51,22 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json",
+            "Wine Manager Service API Version 1");
+
+        c.SupportedSubmitMethods(new[]
+        {
+            SubmitMethod.Get, SubmitMethod.Post,
+            SubmitMethod.Put, SubmitMethod.Delete
+        });
+    });
 }
 
 app.UseHttpsRedirection();
+
+app.UseHttpLogging();
 
 app.UseAuthorization();
 
