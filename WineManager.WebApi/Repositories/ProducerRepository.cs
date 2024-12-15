@@ -67,7 +67,6 @@ namespace WineManager.WebApi.Repositories
             return null;
         }
 
-
         /// <summary>
         /// Returns all producers in the database as an array
         /// </summary>

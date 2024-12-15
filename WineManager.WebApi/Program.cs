@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Formatters;
 using WineManager.DataContext.Sqlite;
 using Microsoft.Extensions.Caching.Memory;
+using WineManager.WebApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,8 +34,9 @@ builder.Services.AddControllers(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IMemoryCache>(
-    new MemoryCache(new MemoryCacheOptions()));
+builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
+builder.Services.AddScoped<IWineRepository, WineRepository>();
+builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
 
 var app = builder.Build();
 
