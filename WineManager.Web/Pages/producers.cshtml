@@ -3,6 +3,20 @@
 @model WineManager.Web.Pages.ProducersModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<script src="/js/pagescripts.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize table functionality
+        initializeTable('selectedProducers', 'selectAll', 'removeButton');
+
+        // Initialize form validation
+        initializeFormValidation(
+            ['validationName', 'validationRegion', 'validationCountry'], // Field IDs
+            'submitButton' // Submit button ID
+        );
+    });
+</script>
+
 <div class="mx-auto p-1 py-3">
     <!-- Added container for better structure -->
     <!-- Header Section -->
@@ -32,9 +46,8 @@
 
         <!-- Producers Table -->
         <div class="table-responsive mb-4">
-            <!-- Added responsive table with spacing -->
-            <table class="table">
-                <thead class="thead-dark">
+                <table class="table table-striped table-hover">
+                <thead>
                     <tr>
                         <th>
                             <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)" />
@@ -65,7 +78,7 @@
     </form>
     </div>
 
-    <!-- Add Producer Form -->
+    <!-- Producer Form -->
     <h4 class="mb-4">Add Producer</h4>
     <form method="POST" id="producerForm" class="was-validated">
         <div class="row gy-3">
@@ -108,24 +121,3 @@
         </div>
     </form>
 </div>
-
-<script>
-    // JavaScript for toggling checkboxes
-    function toggleAllCheckboxes(selectAllCheckbox) {
-        const checkboxes = document.querySelectorAll('input[name="selectedProducers"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = selectAllCheckbox.checked;
-        });
-    }
-</script>
-
-<script>
-    // JavaScript to validate the form
-    function validateForm() {
-        const name = document.getElementById("validationName");
-        const region = document.getElementById("validationRegion");
-        const country = document.getElementById("validationCountry");
-        const submitButton = document.getElementById("submitButton");
-
-        if (name.checkValidity()
-</script>

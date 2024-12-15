@@ -1,22 +1,169 @@
 ﻿@page
-@functions
-{
-    public string? DayName { get; set; }
+@using WineManager.EntityModels
+@model WineManager.Web.Pages.WinesModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-    public void OnGet()
-    {
-        ViewData["Title"] = "Wine Manager";
-        DayName = DateTime.Now.ToString("dddd");
+<script src="/js/pagescripts.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize table functionality
+        initializeTable('selectedWines', 'selectAll', 'removeButton');
+
+
+        // Initialize form validation
+       const fieldIds = ['validationName', 'validationBottleSize', 'validationAlcohol', 'validationProducerName'];
+        initializeFormValidation(fieldIds, 'submitButton');
+        
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Refresh producers dropdown when the page loads
+        refreshProducersDropdown();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            // Refresh producers when returning to the page
+            refreshProducersDropdown();
+            }
+    });
+
+        async function refreshProducersDropdown() {
+
+        try {
+            const response = await fetch('producers?handler=ProducersJson');
+            if (!response.ok) 
+            {
+             throw new Error('Failed to fetch producers');
+            }
+
+            const producers = await response.json();
+            const producerSelect = document.querySelector('select[aria-label="ProducerSelect"]');
+
+            // Clear existing options
+            producerSelect.innerHTML = '';
+
+            // Add default option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Producer';
+                producerSelect.appendChild(defaultOption);
+
+            // Populate new options
+            producers.forEach(producer => {
+                const option = document.createElement('option');
+                option.value = producer.producerId;
+                option.textContent = producer.producerName ? producer.producerName.trim() : 'Unnamed Producer';
+                producerSelect.appendChild(option);
+            });
+        } 
+
+        catch (error) {
+            console.error('Error refreshing producers dropdown:', error);
+        }
     }
-}
+</script>
 
- <div class="jumbotron">
+<div class="mx-auto p-1 py-3">
      <h1 class="display-3">Welcome to @ViewData["Title"]</h1>
-     <p class="lead">It's @DayName A wine management system</p>
+     <p class="lead">A wine management system</p>
      <hr />
+
+    <form method="POST" asp-page-handler="DeleteSelected">
+
      <p>
+        <div class="grid gap-0 row-gap-3">
      <a class="btn btn-primary" href="producers">
          Manage Producers
      </a>
+      <button type="submit" class="btn btn-primary" id="removeButton" disabled>
+                Remove Selected Wine(s)
+        </button>
+     </div>
     </p>
+
+    <div class="table-responsive mb-4">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)" />
+                    </th>
+                    <th>Name</th>
+                    <th>Bottle Size</th>
+                    <th>Alcohol Content</th>
+                    <th>Producer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Wines != null)
+                {
+                    @foreach (Wine wine in Model.Wines)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="selectedWines" value="@wine.WineId" />
+                            </td>
+                            <td>@wine.WineName</td>
+                            <td>@wine.BottleSize</td>
+                            <td>@wine.AlcoholContent</td>
+                            <td>@Model.WineDb.Producers.Where(p => p.ProducerId == wine.ProducerId).FirstOrDefault().ProducerName</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    </form>
+
+    <!-- Wine Form -->
+    <h4 class="mb-4">Add Wine</h4>
+    <form method="POST" id="wineForm" class="was-validated">
+        <div class="row gy-3">
+            <div class="col-md-6">
+                <label for="validationName" class="form-label">Name</label>
+                <input asp-for="Wine.WineName"
+                       placeholder="Name"
+                       class="form-control"
+                       id="validationName"
+                       required
+                       maxlength="50"
+                       oninput="validateForm()">
+                <div class="invalid-feedback" style="display: @(string.IsNullOrEmpty(Model.ErrorMessage) ? "none" : "block")">
+                     @Model.ErrorMessage
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="validationBottleSize" class="form-label">Bottle Size</label>
+                <input asp-for="Wine.BottleSize"
+                       placeholder="Bottle Size"
+                       class="form-control"
+                       id="validationBottleSize"
+                       required
+                       type="number"
+                       oninput="validateForm()">
+            </div>
+            <div class="col-md-6">
+                <label for="validationAlcohol" class="form-label">Alcohol Content</label>
+                <input asp-for="Wine.AlcoholContent"
+                       placeholder="Alcohol Content"
+                       class="form-control is-valid"
+                       id="validationAlcohol"
+                       required
+                       type="number" 
+                        step="0.1" 
+                       oninput="validateForm()">
+            </div>
+            <div class="col-md-6">
+                <label for="validationProducerName" class="form-label">Producer</label>
+                <select asp-for="Wine.ProducerId" class="form-select" id="validationProducerName" aria-label="ProducerSelect" required>
+                    <option value="">Producer</option>  
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 mt-3">
+            <button class="btn btn-primary" type="submit" id="submitButton" disabled>Add</button>
+        </div>
+    </form>
 </div>

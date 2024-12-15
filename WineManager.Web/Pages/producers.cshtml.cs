@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using WineManager.EntityModels;
 
 namespace WineManager.Web.Pages
@@ -34,7 +35,8 @@ namespace WineManager.Web.Pages
             {
                 _db.Producers.Add(Producer);
                 _db.SaveChanges();
-                return RedirectToAction("/producers");
+
+                return RedirectToPage("/producers");
             }
 
             else
@@ -73,12 +75,21 @@ namespace WineManager.Web.Pages
 
         private bool ProducerAlreadyExists(Producer producer)
         {
-            return _db.Producers.Any(x => x.ProducerName == producer.ProducerName);
+            return _db.Producers.Any(x =>x.ProducerName.Trim() == producer.ProducerName.Trim());
         }
 
         private void ReloadProducers() => Producers = _db.Producers
                 .OrderBy(c => c.ProducerName)
                 .ThenBy(c => c.Region)
                 .ThenBy(c => c.Country);
+
+        public IActionResult OnGetProducersJson()
+        {
+            List<Producer> producers = _db.Producers
+                .OrderBy(c => c.ProducerName)
+                .ToList();
+            return new JsonResult(producers);
+        }
+
     }
 }
