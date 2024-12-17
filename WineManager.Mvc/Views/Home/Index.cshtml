@@ -1,0 +1,33 @@
+﻿@using WineManager.EntityModels
+@model List<Wine>
+
+<h1>Wine List</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Wine Name</th>
+                <th>Bottle Size (ml)</th>
+                <th>Alcohol Content (%)</th>
+                <th>Producer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var wine in Model)
+            {
+                <tr>
+                    <td>@wine.WineName</td>
+                    <td>@wine.BottleSize</td>
+                    <td>@wine.AlcoholContent</td>
+                    <td>@wine.Producer</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No wines available.</p>
+}
