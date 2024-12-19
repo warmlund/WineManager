@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineManager.Web", "WineMana
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.WebApi", "WineManager.WebApi", "{9C02F9AA-284D-4176-B432-5A14C38811B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineManager.WebApi", "WineManager.WebApi\WineManager.WebApi.csproj", "{1EB13B0C-CE90-40AF-94C6-5443B664A376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineManager.WebApi", "WineManager.WebApi\WineManager.WebApi.csproj", "{1EB13B0C-CE90-40AF-94C6-5443B664A376}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WineManager.Mvc", "WineManager.Mvc", "{2ECCD501-5050-414D-81CF-76A7308815B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineManager.Mvc", "WineManager.Mvc\WineManager.Mvc.csproj", "{4B610527-0351-4BC9-ABED-B505E964D7A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{1EB13B0C-CE90-40AF-94C6-5443B664A376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB13B0C-CE90-40AF-94C6-5443B664A376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB13B0C-CE90-40AF-94C6-5443B664A376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B610527-0351-4BC9-ABED-B505E964D7A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B610527-0351-4BC9-ABED-B505E964D7A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B610527-0351-4BC9-ABED-B505E964D7A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B610527-0351-4BC9-ABED-B505E964D7A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{297A5FED-0712-4FA6-A069-D1829CA96C86} = {BBB42CE6-1D3F-4816-94C0-3CD5F114ED30}
 		{AC5028FA-5D71-485E-92FC-4A8C3CA5FBFB} = {1F3CD8AF-78B4-4946-B52A-881328C8B791}
 		{1EB13B0C-CE90-40AF-94C6-5443B664A376} = {9C02F9AA-284D-4176-B432-5A14C38811B8}
+		{4B610527-0351-4BC9-ABED-B505E964D7A4} = {2ECCD501-5050-414D-81CF-76A7308815B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EDA686D-7280-4EA3-BED9-08D2F7E16F27}

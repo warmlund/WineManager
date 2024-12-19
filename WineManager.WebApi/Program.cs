@@ -45,6 +45,14 @@ builder.Services.AddHttpLogging(options =>
     options.ResponseBodyLogLimit = 4096;
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", builder =>
+        builder.WithOrigins("http://localhost:5000") // Replace with your MVC port
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,6 +71,8 @@ if (app.Environment.IsDevelopment())
         });
     });
 }
+
+app.UseCors("AllowLocalhost");
 
 app.UseHttpsRedirection();
 
