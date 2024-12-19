@@ -19,8 +19,8 @@ CREATE TABLE wine (
     wineName TEXT NOT NULL,
     bottleSize INTEGER NOT NULL,
     alcoholContent REAL NOT NULL,
-    producerId INTEGER NOT NULL,
-    FOREIGN KEY (producerId) REFERENCES producer(producerId) ON DELETE CASCADE
+    producerName TEXT NOT NULL,
+    FOREIGN KEY (producerName) REFERENCES producer(producerName) ON DELETE CASCADE
 );
 
 -- Insert sample data into producer table
@@ -32,16 +32,14 @@ INSERT INTO producer (producerName, country, region) VALUES
 ('Vega Sicilia', 'Spain', 'Ribera del Duero');
 
 -- Insert sample data into wine table
-INSERT INTO wine (wineName, bottleSize, alcoholContent, producerId) VALUES
-('Château Margaux 2015', 750, 13.5, 1),
-('Pavillon Rouge 2016', 750, 13.0, 1),
-('Tignanello 2018', 750, 14.0, 2),
-('Solaia 2017', 750, 14.5, 2),
-('Cabernet Sauvignon Reserve 2019', 750, 14.0, 3),
-('Fumé Blanc 2020', 750, 13.5, 3),
-('Grange 2015', 750, 15.0, 4),
-('Bin 389 2018', 750, 14.5, 4),
-('Unico 2012', 750, 14.5, 5),
-('Valbuena 5º Año 2015', 750, 14.0, 5);
-
-
+INSERT INTO wine (wineName, bottleSize, alcoholContent, producerName) VALUES
+('Château Margaux 2015', 750, 13.5, 'Château Margaux'),
+('Pavillon Rouge 2016', 750, 13.0, 'Château Margaux'),
+('Tignanello 2018', 750, 14.0, 'Antinori'),
+('Solaia 2017', 750, 14.5, 'Antinori'),
+('Cabernet Sauvignon Reserve 2019', 750, 14.0, 'Robert Mondavi'),
+('Fumé Blanc 2020', 750, 13.5, 'Robert Mondavi'),
+('Grange 2015', 750, 15.0, 'Penfolds'),
+('Bin 389 2018', 750, 14.5, 'Penfolds'),
+('Unico 2012', 750, 14.5, 'Vega Sicilia'),
+('Valbuena 5º Año 2015', 750, 14.0, 'Vega Sicilia');

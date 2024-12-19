@@ -6,8 +6,8 @@ namespace WineManager.WebApi.Repositories
     {
         Task<Producer?> CreateAsync(Producer producer);
         Task<Producer[]> RetrieveAllAsync();
-        Task<Producer?> RetrieveAsync(int id);
+        Task<Producer?> RetrieveAsync(string name);
         Task<Producer?> UpdateAsync(Producer producer);
-        Task<bool?> DeleteAsync(int id);
+        Task<bool?> DeleteAsync(string name);
     }
 }

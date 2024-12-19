@@ -33,7 +33,7 @@ namespace WineManager.Web.Pages
         {
             if (Wine != null && !WineAlreadyExists(Wine))
             {
-                Wine.Producer = _db.Producers.Where(p => p.ProducerId == Wine.ProducerId).FirstOrDefault();
+                Wine.Producer = _db.Producers.Where(p => p.ProducerName == Wine.ProducerName).FirstOrDefault();
                 Console.WriteLine(Wine.Producer.ProducerName);
 
                 _db.Wines.Add(Wine);

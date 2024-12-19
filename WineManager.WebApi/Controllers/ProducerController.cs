@@ -28,9 +28,9 @@ namespace WineManager.WebApi.Controllers
         [HttpGet("{id}", Name =nameof(GetProducer))] //named route
         [ProducesResponseType(200, Type=typeof(Producer))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetProducer(int id)
+        public async Task<IActionResult> GetProducer(string name)
         {
-            Producer? p =await _repo.RetrieveAsync(id);
+            Producer? p =await _repo.RetrieveAsync(name);
 
             if (p == null)
             {
@@ -61,23 +61,23 @@ namespace WineManager.WebApi.Controllers
             {
                 return CreatedAtRoute( // 201 Created
                     routeName: nameof(GetProducer),
-                    routeValues: new { id = addedProducer.ProducerId },
+                    routeValues: new { id = addedProducer.ProducerName },
                     value: addedProducer);
             }
         }
 
-        //PUT: api/producers/[id]
+        //PUT: api/producers/[name]
         //BODY: Producer (JSON, XML)
-        [HttpPut("{id}")]
+        [HttpPut("{name}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Update(int id, [FromBody] Producer producer)
+        public async Task<IActionResult> Update(string name, [FromBody] Producer producer)
         {
-            if (producer == null || producer.ProducerId != id)
+            if (producer == null || producer.ProducerName != name)
                 return BadRequest(); //400
 
-            Producer? existingProducer = await _repo.RetrieveAsync(id);
+            Producer? existingProducer = await _repo.RetrieveAsync(name);
 
             if(existingProducer == null)
                 return NotFound(); //404
@@ -86,37 +86,37 @@ namespace WineManager.WebApi.Controllers
             return new NoContentResult(); //204
         }
 
-        //DELETE: api/producers/[id]
-        [HttpDelete("{id}")]
+        //DELETE: api/producers/[name]
+        [HttpDelete("{name}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string name)
         {
-            if(id==-1)
+            if(string.IsNullOrEmpty(name))
             {
                 ProblemDetails problemDetails = new()
                 {
                     Status = StatusCodes.Status400BadRequest,
                     Type = "https://localhost:5151/producers/failed-to-delete",
-                    Title = $"Producer Id {id} found but failed to delete",
+                    Title = $"Producer {name} found but failed to delete",
                     Instance = HttpContext.Request.Path
                 };
 
                 return BadRequest(problemDetails); //400
             }
 
-            Producer? existingProducer = await _repo.RetrieveAsync(id);
+            Producer? existingProducer = await _repo.RetrieveAsync(name);
             if (existingProducer==null)
                 return NotFound(); //404
 
-            bool? deleted = await _repo.DeleteAsync(id);
+            bool? deleted = await _repo.DeleteAsync(name);
 
             if(deleted.HasValue && deleted.Value)
                 return new NoContentResult(); //204
 
             else
-                return BadRequest($"Producer {id} failed to be deleted."); //400
+                return BadRequest($"Producer {name} failed to be deleted."); //400
         }
     } 
 }

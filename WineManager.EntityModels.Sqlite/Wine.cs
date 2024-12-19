@@ -30,11 +30,11 @@ public partial class Wine
     public double AlcoholContent { get; set; }
 
     [Required]
-    [Column("producerId")]
-    public int ProducerId { get; set; }
+    [Column("producerName")]
+    public string ProducerName { get; set; }
 
     [Required]
-    [ForeignKey("ProducerId")]
+    [ForeignKey("producerName")]
     [InverseProperty("Wines")]
     public virtual Producer Producer { get; set; } = null!;
 }
