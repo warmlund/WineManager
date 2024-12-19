@@ -107,7 +107,7 @@
                             <td>@wine.WineName</td>
                             <td>@wine.BottleSize</td>
                             <td>@wine.AlcoholContent</td>
-                            <td>@Model.WineDb.Producers.Where(p => p.ProducerId == wine.ProducerId).FirstOrDefault().ProducerName</td>
+                            <td>@Model.WineDb.Producers.Where(p => p.ProducerName == wine.ProducerName).FirstOrDefault().ProducerName</td>
                         </tr>
                     }
                 }
@@ -157,7 +157,7 @@
             </div>
             <div class="col-md-6">
                 <label for="validationProducerName" class="form-label">Producer</label>
-                <select asp-for="Wine.ProducerId" class="form-select" id="validationProducerName" aria-label="ProducerSelect" required>
+                <select asp-for="Wine.ProducerName" class="form-select" id="validationProducerName" aria-label="ProducerSelect" required>
                     <option value="">Producer</option>  
                 </select>
             </div>

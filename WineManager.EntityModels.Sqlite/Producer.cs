@@ -11,9 +11,6 @@ namespace WineManager.EntityModels;
 public partial class Producer
 {
     [Key]
-    [Column("producerId")]
-    public int ProducerId { get; set; }
-
     [Required]
     [StringLength(50)]
     [Column("producerName")]

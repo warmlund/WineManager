@@ -62,7 +62,6 @@ public partial class WineManagerContext : DbContext
         modelBuilder.Entity<Producer>(entity =>
         {
             entity.ToTable("producer");
-            entity.Property(p => p.ProducerId).HasColumnName("producerId");
             entity.Property(p => p.ProducerName).HasColumnName("producerName");
             entity.Property(p => p.Country).HasColumnName("country");
             entity.Property(p => p.Region).HasColumnName("region");

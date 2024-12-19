@@ -35,7 +35,7 @@ namespace WineManager.WebApi.Repositories
             if (affected == 1)
             {
                 //If saved to database then it will be stored in cache
-                _memoryCache.Set(producer.ProducerId, producer, _cacheEntryOptions);
+                _memoryCache.Set(producer.ProducerName, producer, _cacheEntryOptions);
                 return producer;
             }
 
@@ -46,11 +46,11 @@ namespace WineManager.WebApi.Repositories
         /// Delestes a producer object. if sucessful the cached producer
         /// is deleted as well
         /// </summary>
-        /// <param name="id">producer id</param>
+        /// <param name="name">producer name</param>
         /// <returns>true if sucessfull</returns>
-        public async Task<bool?> DeleteAsync(int id)
+        public async Task<bool?> DeleteAsync(string name)
         {
-            Producer? producer = await _db.Producers.FindAsync(id);
+            Producer? producer = await _db.Producers.FindAsync(name);
 
             if (producer == null)
                 return null;
@@ -60,7 +60,7 @@ namespace WineManager.WebApi.Repositories
 
             if (affected == 1)
             {
-                _memoryCache.Remove(producer.ProducerId);
+                _memoryCache.Remove(producer.ProducerName);
                 return true;
             }
 
@@ -79,20 +79,20 @@ namespace WineManager.WebApi.Repositories
         /// <summary>
         /// Retrieves a producer based on id
         /// </summary>
-        /// <param name="id">producer id</param>
+        /// <param name="name">producer name</param>
         /// <returns>producer</returns>
-        public Task<Producer?> RetrieveAsync(int id)
+        public Task<Producer?> RetrieveAsync(string name)
         {
             //Try to retrieve data from cache for better performance
-            if (_memoryCache.TryGetValue(id, out Producer? producerFromCache))
+            if (_memoryCache.TryGetValue(name, out Producer? producerFromCache))
                 return Task.FromResult(producerFromCache);
 
-            Producer? producerFromdb = _db.Producers.FirstOrDefault(w => w.ProducerId == id);
+            Producer? producerFromdb = _db.Producers.FirstOrDefault(w => w.ProducerName == name);
 
             if (producerFromdb == null)
                 return Task.FromResult(producerFromdb); //Return null result if the id doesn't exist in the database either
 
-            _memoryCache.Set(producerFromdb.ProducerId, producerFromdb, _cacheEntryOptions); //if id is in database, store in cache
+            _memoryCache.Set(producerFromdb.ProducerName, producerFromdb, _cacheEntryOptions); //if id is in database, store in cache
             return Task.FromResult(producerFromdb); //return producer
         }
 
@@ -109,7 +109,7 @@ namespace WineManager.WebApi.Repositories
 
             if (affected == 1)
             {
-                _memoryCache.Set(producer.ProducerId, producer, _cacheEntryOptions);
+                _memoryCache.Set(producer.ProducerName, producer, _cacheEntryOptions);
                 return producer;
             }
 
