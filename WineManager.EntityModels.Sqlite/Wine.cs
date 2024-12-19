@@ -31,10 +31,9 @@ public partial class Wine
 
     [Required]
     [Column("producerName")]
-    public string ProducerName { get; set; }
+    [ForeignKey(nameof(Producer))] // Explicitly set the foreign key
+    public string ProducerName { get; set; } = null!;
 
-    [Required]
-    [ForeignKey("producerName")]
     [InverseProperty("Wines")]
     public virtual Producer Producer { get; set; } = null!;
 }

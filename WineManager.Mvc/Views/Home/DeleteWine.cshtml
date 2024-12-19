@@ -1,0 +1,30 @@
+﻿﻿@using WineManager.EntityModels
+@model Wine
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="DeleteWinePost" method="post">
+    <div class="mb-3">
+        <label class="form-label" for="WineName">Wine Name</label>
+        <input class="form-control" id="WineName" value="@Model.WineName" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="BottleSize">Bottle Size</label>
+        <input class="form-control" id="BottleSize" value="@Model.BottleSize" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="AlcoholContent">Alcohol Content</label>
+        <input class="form-control" id="AlcoholContent" value="@Model.AlcoholContent" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Producer">Producer</label>
+        <input class="form-control" id="Producer" value="@Model.ProducerName" readonly />
+    </div>
+    <div class="mb-3">
+        @Html.HiddenFor(c => c.WineName)
+        <input type="submit" value="Delete Wine"
+               class="btn btn-outline-danger" />
+        <a href="index" class="btn btn-outline-secondary">
+            Cancel
+        </a>
+    </div>
+</form>

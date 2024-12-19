@@ -1,5 +1,5 @@
 ﻿@using WineManager.EntityModels
-@model List<Wine>
+@model List<Producer>
 @if (TempData["error"] is not null)
 {
     <p class="alert alert-danger">@TempData["error"]</p>
@@ -9,35 +9,33 @@
     <p class="alert alert-success">@TempData["success"]</p>
 }
 
-<a asp-controller="Home" asp-action="AddWine"
-   class="btn btn-outline-primary">Add Wine</a>
+<a asp-controller="Home" asp-action="AddProducer"
+   class="btn btn-outline-primary">Add Producer</a>
 
-<h1>Wines</h1>
+<h1>Producers</h1>
 
 @if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Wine Name</th>
-                <th>Bottle Size (ml)</th>
-                <th>Alcohol Content (%)</th>
-                <th>Producer</th>
+                <th>Producer Name</th>
+                <th>Region</th>
+                <th>Country</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Wine wine in Model)
+            @foreach (Producer p in Model)
             {
                 <tr>
-                    <td>@wine.WineName</td>
-                    <td>@wine.BottleSize</td>
-                    <td>@wine.AlcoholContent</td>
-                    <td>@wine.ProducerName</td>
+                    <td>@p.ProducerName</td>
+                    <td>@p.Region</td>
+                    <td>@p.Country</td>
                     <td>
                         <a asp-controller="Home"
-                           asp-action="DeleteWine"
-                           asp-route-producername="@wine.WineName"
+                           asp-action="DeleteProducer"
+                           asp-route-producername="@p.ProducerName"
                            class="btn btn-outline-danger">Delete</a>
                     </td>
                 </tr>
@@ -47,5 +45,5 @@
 }
 else
 {
-    <p>No wines available.</p>
+    <p>No producers available.</p>
 }
