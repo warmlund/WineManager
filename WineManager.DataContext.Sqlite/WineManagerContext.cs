@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WineManager.DataContext.Sqlite;
 
 namespace WineManager.EntityModels;
@@ -40,12 +38,12 @@ public partial class WineManagerContext : DbContext
                 path = Path.Combine("..", database);
             }
 
-            path=Path.GetFullPath(path);
+            path = Path.GetFullPath(path);
             WineManagerContextLogger.WriteLine($"Database path: {path}");
 
             if (!File.Exists(path))
             {
-                throw new FileNotFoundException(message: $"{path} not found.", fileName: path );
+                throw new FileNotFoundException(message: $"{path} not found.", fileName: path);
             }
 
             optionsBuilder.UseSqlite($"Data Source={path}");
@@ -56,9 +54,9 @@ public partial class WineManagerContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Wine>()
-            .HasOne(w => w.Producer)
-            .WithMany(w => w.Wines)
-            .HasForeignKey(w => w.ProducerId)
+            .HasOne(w=>w.Producer)
+            .WithMany(w=> w.Wines)
+            .HasForeignKey(w=>w.ProducerName)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Producer>(entity =>
@@ -77,7 +75,7 @@ public partial class WineManagerContext : DbContext
             entity.Property(w => w.WineName).HasColumnName("wineName");
             entity.Property(w => w.BottleSize).HasColumnName("bottleSize");
             entity.Property(w => w.AlcoholContent).HasColumnName("alcoholContent");
-            entity.Property(w => w.ProducerId).HasColumnName("producerId");
+            entity.Property(w => w.ProducerName).HasColumnName("producerName");
         });
 
         modelBuilder.Entity<Wine>(entity =>
