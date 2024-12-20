@@ -1,0 +1,49 @@
+﻿@using WineManager.EntityModels
+@model Wine
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AddWine" method="post">
+    <div class="mb-3">
+        <label class="form-label" asp-for="WineName">Wine Name</label>
+        <input class="form-control" asp-for="WineName" />
+        <span asp-validation-for="WineName" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="BottleSize">Bottle Size</label>
+        <input class="form-control" asp-for="BottleSize" type="number" step="1" />
+        <span asp-validation-for="BottleSize" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="AlcoholContent">Alcohol Content</label>
+        <input class="form-control" asp-for="AlcoholContent" type="number" step="0.1" />
+        <span asp-validation-for="AlcoholContent" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="ProducerName">Producer</label>
+        <select class="form-select" asp-for="ProducerName">
+            <option value="" disabled selected>Select a producer</option>
+            @foreach (var producer in (ViewBag.Producers as IEnumerable<SelectListItem>))
+            {
+                if (producer.Value == Model?.ProducerName)
+                {
+                    <option value="@producer.Value" selected="selected">
+                        @producer.Text
+                    </option>
+                }
+                else
+                {
+                    <option value="@producer.Value">
+                        @producer.Text
+                    </option>
+                }
+            }
+        </select>
+        <span asp-validation-for="ProducerName" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Add Wine" class="btn btn-outline-primary" />
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+</form>

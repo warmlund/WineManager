@@ -23,7 +23,7 @@ namespace WineManager.WebApi.Repositories
         }
 
         /// <summary>
-        /// 
+        /// Creates a wine object
         /// </summary>
         /// <param name="wine"></param>
         /// <returns></returns>

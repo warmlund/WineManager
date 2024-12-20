@@ -25,7 +25,7 @@ namespace WineManager.WebApi.Controllers
         }
 
         //GET: api/producers/id
-        [HttpGet("{id}", Name =nameof(GetProducer))] //named route
+        [HttpGet("{name}", Name =nameof(GetProducer))] //named route
         [ProducesResponseType(200, Type=typeof(Producer))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetProducer(string name)
@@ -61,7 +61,7 @@ namespace WineManager.WebApi.Controllers
             {
                 return CreatedAtRoute( // 201 Created
                     routeName: nameof(GetProducer),
-                    routeValues: new { id = addedProducer.ProducerName },
+                    routeValues: new { name = addedProducer.ProducerName },
                     value: addedProducer);
             }
         }

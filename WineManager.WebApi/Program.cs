@@ -48,7 +48,7 @@ builder.Services.AddHttpLogging(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", builder =>
-        builder.WithOrigins("http://localhost:5000") // Replace with your MVC port
+        builder.WithOrigins("https://localhost:5141;http://localhost:5140") // MVC ports
                .AllowAnyMethod()
                .AllowAnyHeader());
 });
