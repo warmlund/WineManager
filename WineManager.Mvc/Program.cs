@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Adds the web api as a http client
 builder.Services.AddHttpClient(name: "WineManager.WebApi",
     configureClient: options =>
     {

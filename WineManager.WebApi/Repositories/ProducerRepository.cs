@@ -14,7 +14,7 @@ namespace WineManager.WebApi.Repositories
             SlidingExpiration = TimeSpan.FromMinutes(30) //Inactive cache will be deleted after 30 minutes
         };
 
-        private WineManagerContext _db;
+        private WineManagerContext _db; // use instnance data context to prevent it from being cached
 
         public ProducerRepository(WineManagerContext db, IMemoryCache memoryCache)
         {
@@ -23,7 +23,7 @@ namespace WineManager.WebApi.Repositories
         }
 
         /// <summary>
-        /// 
+        /// Creates a new producer and saves to the database
         /// </summary>
         /// <param name="producer"></param>
         /// <returns></returns>

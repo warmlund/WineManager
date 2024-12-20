@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
-using Microsoft.EntityFrameworkCore;
-
 namespace WineManager.EntityModels;
+
+/// <summary>
+/// Entity model for producer
+/// </summary>
 
 [Table("producer")]
 public partial class Producer

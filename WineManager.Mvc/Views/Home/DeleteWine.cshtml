@@ -1,29 +1,29 @@
 ﻿﻿@using WineManager.EntityModels
-@model Wine
+@model Wine //Use wine entity model
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="DeleteWinePost" method="post">
+<form asp-action="DeleteWinePost" method="post"> @*Form that posts the form data to action DeleteWinePost in the controller*@
     <div class="mb-3">
         <label class="form-label" for="WineName">Wine Name</label>
-        <input class="form-control" id="WineName" value="@Model.WineName" readonly />
+        <input class="form-control" id="WineName" value="@Model.WineName" readonly /> @*Displays the name of the wine chosen to be deleted*@
     </div>
     <div class="mb-3">
         <label class="form-label" for="BottleSize">Bottle Size</label>
-        <input class="form-control" id="BottleSize" value="@Model.BottleSize" readonly />
+        <input class="form-control" id="BottleSize" value="@Model.BottleSize" readonly /> @*Displays the bottle size of the wine chosen to be deleted*@
     </div>
     <div class="mb-3">
         <label class="form-label" for="AlcoholContent">Alcohol Content</label>
-        <input class="form-control" id="AlcoholContent" value="@Model.AlcoholContent" readonly />
+        <input class="form-control" id="AlcoholContent" value="@Model.AlcoholContent" readonly /> @*Displays the alcohol content of the wine chosen to be deleted*@
     </div>
     <div class="mb-3">
         <label class="form-label" for="Producer">Producer</label>
-        <input class="form-control" id="Producer" value="@Model.ProducerName" readonly />
+        <input class="form-control" id="Producer" value="@Model.ProducerName" readonly /> @*Displays the producer name of the wine chosen to be deleted*@
     </div>
     <div class="mb-3">
-        @Html.HiddenFor(w => w.WineId)
+        @Html.HiddenFor(w => w.WineId) @*Hidden field of the wine id for the action method to know which wine to delete*@
         <input type="submit" value="Delete Wine"
-               class="btn btn-outline-danger" />
-        <a href="index" class="btn btn-outline-secondary">
+               class="btn btn-outline-danger" /> @*Submit button*@
+        <a href="index" class="btn btn-outline-secondary"> @*Cancel button*@
             Cancel
         </a>
     </div>

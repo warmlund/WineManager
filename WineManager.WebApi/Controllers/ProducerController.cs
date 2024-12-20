@@ -4,12 +4,16 @@ using WineManager.WebApi.Repositories;
 
 namespace WineManager.WebApi.Controllers
 {
+    /// <summary>
+    /// Controller for producer. Handles incoming requests and uses the repository for handling
+    /// </summary>
+
     //base address: api/producers
     [Route("api/producers")]
     [ApiController]
     public class ProducerController : Controller
     {
-        private readonly IProducerRepository _repo;
+        private readonly IProducerRepository _repo; 
         public ProducerController(IProducerRepository repo)
         {
             _repo = repo;

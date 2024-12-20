@@ -14,6 +14,7 @@ public partial class WineManagerContext : DbContext
     {
     }
 
+    //DbSets for each table of the database
     public virtual DbSet<Producer> Producers { get; set; }
 
     public virtual DbSet<Wine> Wines { get; set; }
@@ -22,7 +23,7 @@ public partial class WineManagerContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            string database = "WineManager.db";
+            string database = "WineManager.db"; //Name of the database
             string dir = Environment.CurrentDirectory;
             string path = string.Empty;
 
@@ -38,27 +39,33 @@ public partial class WineManagerContext : DbContext
                 path = Path.Combine("..", database);
             }
 
-            path = Path.GetFullPath(path);
-            WineManagerContextLogger.WriteLine($"Database path: {path}");
+            path = Path.GetFullPath(path); //Get the full path
+            WineManagerContextLogger.WriteLine($"Database path: {path}"); //Log the database path
 
-            if (!File.Exists(path))
+            if (!File.Exists(path)) //Checks if the database file exists
             {
                 throw new FileNotFoundException(message: $"{path} not found.", fileName: path);
             }
 
-            optionsBuilder.UseSqlite($"Data Source={path}");
+            optionsBuilder.UseSqlite($"Data Source={path}"); //Configure the DbContext to use SQLite
             optionsBuilder.LogTo(WineManagerContextLogger.WriteLine, new[] { Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting });
         }
     }
 
+    /// <summary>
+    /// Configures the models for the database
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Define the relationship between Wine and Producer entities
         modelBuilder.Entity<Wine>()
             .HasOne(w=>w.Producer)
             .WithMany(w=> w.Wines)
             .HasForeignKey(w=>w.ProducerName)
             .OnDelete(DeleteBehavior.Cascade);
 
+        //Configure the producer entity
         modelBuilder.Entity<Producer>(entity =>
         {
             entity.ToTable("producer");
@@ -67,6 +74,7 @@ public partial class WineManagerContext : DbContext
             entity.Property(p => p.Region).HasColumnName("region");
         });
 
+        //Configure the wine entity
         modelBuilder.Entity<Wine>(entity =>
         {
             entity.ToTable("wine");

@@ -5,10 +5,12 @@ using WineManager.WebApi.Repositories;
 using WineManager.DataContext.Sqlite;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args); //Create a new web application builder
 
 // Add services to the container.
-builder.Services.AddWineManagerContext();
+builder.Services.AddWineManagerContext(); //Registers the database context to enable acces to the database
+
+//Add a controller for writing the names of supported media types
 builder.Services.AddControllers(options =>
 {
     Console.WriteLine("Default output formatters:");
@@ -35,9 +37,10 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
-builder.Services.AddScoped<IWineRepository, WineRepository>();
-builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
+builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions())); //Enabling caching data in memory
+builder.Services.AddScoped<IWineRepository, WineRepository>(); //Register the wine repository
+builder.Services.AddScoped<IProducerRepository, ProducerRepository>(); //Register the producer repository
+
 builder.Services.AddHttpLogging(options =>
 {
     options.LoggingFields = HttpLoggingFields.All;

@@ -1,25 +1,25 @@
 ﻿﻿@using WineManager.EntityModels
-@model Producer
+@model Producer //Use producer entity model
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="DeleteProducerPost" method="post">
+<form asp-action="DeleteProducerPost" method="post"> @*Form that posts data to the DeleteProducerPost action in the controller*@
     <div class="mb-3">
         <label class="form-label" for="ProducerName">Producer Name</label>
-        <input class="form-control" id="ProducerName" value="@Model.ProducerName" readonly />
+        <input class="form-control" id="ProducerName" value="@Model.ProducerName" readonly /> @*Displays the name of the producer chosen to be deleted*@
     </div>
     <div class="mb-3">
         <label class="form-label" for="region">Region</label>
-        <input class="form-control" id="region" value="@Model.Region" readonly />
+        <input class="form-control" id="region" value="@Model.Region" readonly /> @*Displays the region of the producer chosen to be deleted*@
     </div>
     <div class="mb-3">
         <label class="form-label" for="country">Country</label>
-        <input class="form-control" id="country" value="@Model.Country" readonly />
+        <input class="form-control" id="country" value="@Model.Country" readonly /> @*Displays the country of the producer chosen to be deleted*@
     </div>
     <div class="mb-3">
-        @Html.HiddenFor(c => c.ProducerName)
+        @Html.HiddenFor(c => c.ProducerName) @*Hidden field of the producer name for the action method to know which producer ot delete*@
         <input type="submit" value="Delete Producer"
-               class="btn btn-outline-danger" />
-        <a href="Producers" class="btn btn-outline-secondary">
+               class="btn btn-outline-danger" /> @*Submit button*@
+        <a href="Producers" class="btn btn-outline-secondary"> @*Cancel button*@
             Cancel
         </a>
     </div>
