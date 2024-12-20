@@ -120,14 +120,17 @@ namespace WineManager.Mvc.Controllers
         }
 
         //GET add wine
-        public IActionResult AddWine()
+        public async Task<IActionResult> AddWineAsync()
         {
-            ViewData["Title"] = "Add Wine";
-            List<Producer> producers = GetProducerList().Result;
+            var producers = GetProducerList().Result.Select(p => new SelectListItem
+            {
+                Value = p.ProducerName,
+                Text = p.ProducerName
+            }).ToList();
 
-            ViewBag.Producers = new SelectList(producers, "ProducerName", "ProducerName");
+            ViewBag.Producers = producers;
 
-            return View();
+            return View(new Wine());
         }
 
         //POST add wine
@@ -138,14 +141,14 @@ namespace WineManager.Mvc.Controllers
             HttpResponseMessage response = await client.PostAsJsonAsync(requestUri: "api/wines", value: wine);
 
             if (response.IsSuccessStatusCode)
-                TempData["success"] = "Wine added";
+                TempData["success"] = $"Wine added";
             else
-                TempData["error"] = "Wine not added";
+                TempData["error"] = $"Wine not added";
 
             return RedirectToAction("Index");
         }
 
-        //GET delete producer
+        //GET delete wine
         public async Task<IActionResult> DeleteWine(int wineId)
         {
             HttpClient client = _httpClientFactory.CreateClient(name: "WineManager.WebApi");
@@ -158,7 +161,7 @@ namespace WineManager.Mvc.Controllers
             return View(wine);
         }
 
-        //POST deletion of producer
+        //POST deletion of wine
         public async Task<IActionResult> DeleteWinePost(int wineId)
         {
             HttpClient client = _httpClientFactory.CreateClient(name: "WineManager.WebApi");

@@ -20,7 +20,7 @@
         <input class="form-control" id="Producer" value="@Model.ProducerName" readonly />
     </div>
     <div class="mb-3">
-        @Html.HiddenFor(c => c.WineName)
+        @Html.HiddenFor(w => w.WineId)
         <input type="submit" value="Delete Wine"
                class="btn btn-outline-danger" />
         <a href="index" class="btn btn-outline-secondary">
