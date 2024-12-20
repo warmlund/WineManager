@@ -2,6 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using WineManager.EntityModels;
 
+/// <summary>
+/// Entity Model for wine
+/// </summary>
+
 [Table("wine")]
 public partial class Wine
 {
@@ -26,5 +30,5 @@ public partial class Wine
     public string ProducerName { get; set; } = null!;
 
     [InverseProperty("Wines")]
-    public virtual Producer? Producer { get; set; } // Nullable navigation property
+    public virtual Producer? Producer { get; set; }
 }
