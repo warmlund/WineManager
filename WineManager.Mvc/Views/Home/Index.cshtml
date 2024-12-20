@@ -1,24 +1,24 @@
 ﻿@using WineManager.EntityModels
-@model List<Wine>
-@if (TempData["error"] is not null)
+@model List<Wine> //List of all wines used as model for the view
+@if (TempData["error"] is not null) //checks if there are any error messages stored in the tempdata
 {
     <p class="alert alert-danger">@TempData["error"]</p>
 }
-@if (TempData["success"] is not null)
+@if (TempData["success"] is not null) //checks if there are any success messages stored in the tempdata
 {
     <p class="alert alert-success">@TempData["success"]</p>
 }
 
 <a asp-controller="Home" asp-action="AddWine"
-   class="btn btn-outline-primary">Add Wine</a>
+   class="btn btn-outline-primary">Add Wine</a> @* Buttton navigating to the AddWine action in the controller *@
 
 <h1>Wines</h1>
 
-@if (Model != null && Model.Any())
+@if (Model != null && Model.Any()) @*Checks if there are any wines in the list*@
 {
-    <table class="table">
+    <table class="table"> @*Creates table for listing all wines*@
         <thead>
-            <tr>
+            <tr> @*Sets the table headers*@
                 <th>Wine Name</th>
                 <th>Bottle Size (ml)</th>
                 <th>Alcohol Content (%)</th>
@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Wine wine in Model)
+            @foreach (Wine wine in Model) @*Iterates through the wines in the list*@
             {
                 <tr>
                     <td>@wine.WineName</td>
@@ -38,7 +38,7 @@
                         <a asp-controller="Home"
                            asp-action="DeleteWine"
                            asp-route-wineId="@wine.WineId"
-                           class="btn btn-outline-danger">Delete</a>
+                           class="btn btn-outline-danger">Delete</a> @*Button for deletion of wine,the id as route parameter*@
                     </td>
                 </tr>
             }
@@ -47,5 +47,5 @@
 }
 else
 {
-    <p>No wines available.</p>
+    <p>No wines available.</p> @*Shows if the model is empty*@
 }

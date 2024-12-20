@@ -1,31 +1,31 @@
 ﻿@using WineManager.EntityModels
-@model Wine
+@model Wine //using the wine entity model
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="AddWine" method="post">
+<form asp-action="AddWine" method="post"> @*Form that posts data to the AddWine action in the controller*@
     <div class="mb-3">
         <label class="form-label" asp-for="WineName">Wine Name</label>
-        <input class="form-control" asp-for="WineName" />
+        <input class="form-control" asp-for="WineName" /> @*Input field for Wine name*@
         <span asp-validation-for="WineName" class="text-danger" />
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="BottleSize">Bottle Size</label>
-        <input class="form-control" asp-for="BottleSize" type="number" step="1" />
+        <input class="form-control" asp-for="BottleSize" type="number" step="1" /> @*Input field for Bottle size*@
         <span asp-validation-for="BottleSize" class="text-danger" />
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="AlcoholContent">Alcohol Content</label>
-        <input class="form-control" asp-for="AlcoholContent" type="number" step="0.1" />
+        <input class="form-control" asp-for="AlcoholContent" type="number" step="0.1" /> @*Input field for Alcohol content*@
         <span asp-validation-for="AlcoholContent" class="text-danger" />
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="ProducerName">Producer</label>
-        <select class="form-select" asp-for="ProducerName">
+        <select class="form-select" asp-for="ProducerName"> @*Dropdown list of producers in the database. passe via a ViewBag*@
             <option value="" disabled selected>Select a producer</option>
             @foreach (var producer in (ViewBag.Producers as IEnumerable<SelectListItem>))
             {
-                if (producer.Value == Model?.ProducerName)
+                if (producer.Value == Model?.ProducerName) @*If the producer matches the current value in the model, it is selected*@
                 {
                     <option value="@producer.Value" selected="selected">
                         @producer.Text
@@ -39,11 +39,11 @@
                 }
             }
         </select>
-        <span asp-validation-for="ProducerName" class="text-danger" />
+        <span asp-validation-for="ProducerName" class="text-danger" /> @*Validation field for producer name*@
     </div>
     <div class="mb-3">
-        <input type="submit" value="Add Wine" class="btn btn-outline-primary" />
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
-        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="submit" value="Add Wine" class="btn btn-outline-primary" /> @*Sumbit button of the form*@
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Cancel</a> @*Cancel button*@
+        <div asp-validation-summary="All" class="text-danger"></div> @*Lists all validation errors if there are any*@
     </div>
 </form>

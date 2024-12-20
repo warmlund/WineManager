@@ -1,29 +1,30 @@
 ﻿﻿@using WineManager.EntityModels
-@model Producer
+@model Producer //Using the producer entity model
 
-<h2>@ViewData["Title"]</h2>
+<h2>@ViewData["Title"]</h2> @*Title retrieved from ViewData*@
 
-<form asp-action="AddProducer" method="post">
+<form asp-action="AddProducer" method="post"> @*Form that posts data to the AddProducer action in the controller*@
     <div class="mb-3">
         <label class="form-label" asp-for="ProducerName">Producer Name</label>
-        <input class="form-control" asp-for="ProducerName" />
-        <span asp-validation-for="ProducerName" class="text-danger" />
+        <input class="form-control" asp-for="ProducerName" /> @*Input field for producer name*@
+        <span asp-validation-for="ProducerName" class="text-danger" /> @*Validation field*@
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Region">Region</label>
-        <input class="form-control" asp-for="Region" />
+        <input class="form-control" asp-for="Region" /> @*Input field for region*@
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Country">Country</label>
-        <input class="form-control" asp-for="Country" />
+        <input class="form-control" asp-for="Country" /> @*Input field for country*@
     </div>
     <div class="mb-3">
         <input type="submit" value="Add Producer"
-               class="btn btn-outline-primary" />
+               class="btn btn-outline-primary" /> @*sumbit button for the form*@
+
         <a asp-controller="Home" asp-action="Producers"
            class="btn btn-outline-secondary">
             Cancel
-        </a>
-        <div asp-validation-summary="All" class="text-danger" />
+        </a> @*Cancel button*@
+        <div asp-validation-summary="All" class="text-danger" /> @*Displays all validation errors on the form*@
     </div>
 </form>

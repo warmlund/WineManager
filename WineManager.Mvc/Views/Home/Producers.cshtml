@@ -1,24 +1,25 @@
 ﻿@using WineManager.EntityModels
-@model List<Producer>
-@if (TempData["error"] is not null)
+@model List<Producer> //List of producers used as model
+@if (TempData["error"] is not null) //checks if there are any error messages stored in the tempdata
 {
     <p class="alert alert-danger">@TempData["error"]</p>
 }
-@if (TempData["success"] is not null)
+@if (TempData["success"] is not null) //checks if there are any success messages stored in the tempdata
 {
     <p class="alert alert-success">@TempData["success"]</p>
 }
 
 <a asp-controller="Home" asp-action="AddProducer"
-   class="btn btn-outline-primary">Add Producer</a>
+   class="btn btn-outline-primary">Add Producer</a> @* Buttton navigating to the AddProducer action in the controller *@
 
 <h1>Producers</h1>
 
-@if (Model != null && Model.Any())
+@if (Model != null && Model.Any())  @*Checks if there are any producers in the list*@
 {
-    <table class="table">
+    <table class="table"> @*Creates table for listing all producers*@
         <thead>
             <tr>
+                @*Sets the table headers*@
                 <th>Producer Name</th>
                 <th>Region</th>
                 <th>Country</th>
@@ -26,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Producer p in Model)
+            @foreach (Producer p in Model) @*Iterates through the producers in the list*@
             {
                 <tr>
                     <td>@p.ProducerName</td>
@@ -36,7 +37,7 @@
                         <a asp-controller="Home"
                            asp-action="DeleteProducer"
                            asp-route-producername="@p.ProducerName"
-                           class="btn btn-outline-danger">Delete</a>
+                           class="btn btn-outline-danger">Delete</a> @*Button for deletion of producer,the name as route parameter*@
                     </td>
                 </tr>
             }
@@ -45,5 +46,5 @@
 }
 else
 {
-    <p>No producers available.</p>
+    <p>No producers available.</p> @*Shows if the model is empty*@
 }
