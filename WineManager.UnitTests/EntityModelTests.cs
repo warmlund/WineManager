@@ -5,6 +5,9 @@ namespace WineManager.UnitTests
 {
     public class EntityModelTests
     {
+        /// <summary>
+        /// Tests that the database connection works
+        /// </summary>
         [Fact]
         public void DatabaseConnectTest()
         {
@@ -15,6 +18,10 @@ namespace WineManager.UnitTests
             Assert.True(db.Database.CanConnect(), "Should be able to connect to database");
         }
 
+
+        /// <summary>
+        /// Checks that the number of wines in the database are correct
+        /// </summary>
         [Fact]
         public void CheckSampleDataCreation()
         {
@@ -29,6 +36,9 @@ namespace WineManager.UnitTests
             Assert.Equal(expectedNumberOfWines, actualNumberOfWines);
         }
 
+        /// <summary>
+        /// Checks that the first name of the wine is correct
+        /// </summary>
         [Fact]
         public void FirstProducerNameTest()
         {

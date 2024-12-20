@@ -4,6 +4,10 @@ using WineManager.WebApi.Repositories;
 
 namespace WineManager.WebApi.Controllers
 {
+    /// <summary>
+    /// Controller for wine. Handles incoming requests and uses the repository for handling
+    /// </summary>
+
     //base address: api/wines
     [Route("api/wines")]
     [ApiController]
